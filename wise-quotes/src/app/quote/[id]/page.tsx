@@ -1,14 +1,18 @@
 "use client";
 
-import { getAllIds, getQuoteById } from "@/lib/quotes";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { getQuoteById } from "@/lib/quotes";
+import { redirect, useParams, useRouter } from "next/navigation";
 
 export default function QuotePage() {
   const params = useParams();
   const id = params?.id as string;
 
   const quote = getQuoteById(id);
+
+  const router = useRouter();
+  setTimeout(() => {
+    router.push("/random");
+  }, 10000);
 
   return (
     <div className="font-serif max-w-5xl mx-auto p-4 tracking-wider leading-relaxed text-xl">
@@ -21,7 +25,7 @@ export default function QuotePage() {
           <footer className="text-right">~{quote.author}</footer>
         </>
       ) : (
-        <p>Id not fount - SHOULD REDIRECT SOMEHWEREREERERER</p>
+        redirect(`/`)
       )}
     </div>
   );

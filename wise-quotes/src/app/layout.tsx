@@ -28,7 +28,7 @@ export default function RootLayout({
         >
           <Link href="/">Intro</Link>
           <Link href="/random">Random</Link>
-          <Link href="/quote/mam-0001">First</Link>
+          <Link href="/quote/Marcus-Aurelius-Meditations-0101">First</Link>
         </header>
         <main className="pt-16">{children}</main>
       </body>

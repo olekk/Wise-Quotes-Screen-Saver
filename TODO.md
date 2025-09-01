@@ -21,6 +21,7 @@ hiding menu with:
 Tools to:
 shuffle sources
 set transition time
+countdown
 
 # Step 4
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import "./globals.css";
 import { Inter, EB_Garamond } from "next/font/google";
 import { useState } from "react";
+import Menu from "@/components/layout/Menu";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const garamond = EB_Garamond({ subsets: ["latin"], variable: "--font-serif" });
@@ -23,12 +24,10 @@ export default function RootLayout({
         ></div>
         <header
           onMouseLeave={() => setIsMenuHidden(true)}
-          className="fixed top-0 inset-x-0 p-4 flex flex-col gap-4 bg-white/60 backdrop-blur w-[250px] h-[100vh] transition-all"
+          className="fixed top-0 inset-x-0 p-4 flex flex-col gap-4 bg-black/60 backdrop-blur w-[250px] h-[100vh] transition-all"
           style={{ left: isMenuHidden ? "-250px" : "0" }}
         >
-          <Link href="/">Intro</Link>
-          <Link href="/random">Random</Link>
-          <Link href="/quote/Marcus-Aurelius-Meditations-0101">First</Link>
+          <Menu />
         </header>
         <main className="pt-16">{children}</main>
       </body>

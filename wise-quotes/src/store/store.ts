@@ -1,6 +1,7 @@
 "use client";
 
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 type SettingsState = {
   isPlaying: boolean;
@@ -13,13 +14,25 @@ type SettingsState = {
   setChosenBooks: (ids: string[]) => void;
 };
 
-export const useSettings = create<SettingsState>((set) => ({
-  isPlaying: true,
-  transitionTime: 10_000,
-  chosenBooks: [],
-
-  setIsPlaying: (v) => set({ isPlaying: v }),
-  toggleIsPlaying: () => set((s) => ({ isPlaying: !s.isPlaying })),
-  setTransitionTime: (ms) => set({ transitionTime: Math.max(1000, ms) }),
-  setChosenBooks: (ids) => set({ chosenBooks: Array.from(new Set(ids)) }),
-}));
+export const useSettings = create<SettingsState>()(
+  persist(
+    (set, get) => ({
+      isPlaying: true,
+      transitionTime: 10_000,
+      chosenBooks: [],
+      setIsPlaying: (v) => set({ isPlaying: v }),
+      toggleIsPlaying: () => set({ isPlaying: !get().isPlaying }),
+      setTransitionTime: (ms) => set({ transitionTime: Math.max(1000, ms) }),
+      setChosenBooks: (ids) => set({ chosenBooks: Array.from(new Set(ids)) }),
+    }),
+    {
+      name: "wq-settings",
+      storage: createJSONStorage(() => localStorage),
+      partialize: (s) => ({
+        isPlaying: s.isPlaying,
+        transitionTime: s.transitionTime,
+        chosenBooks: s.chosenBooks,
+      }),
+    }
+  )
+);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { getQuoteById } from "@/lib/quotes";
 import { useSettings } from "@/store/store";
@@ -8,36 +8,22 @@ import { useSettings } from "@/store/store";
 export default function QuotePage() {
   const { id } = useParams() as { id: string };
   const quote = getQuoteById(id);
-  const { isPlaying, transitionTime } = useSettings();
+  const { isPlaying, timeLeft } = useSettings();
   const router = useRouter();
-  const timeoutRef = useRef<number | null>(null);
 
   // If quote missing, navigate home (client-safe)
   useEffect(() => {
     if (!quote) router.replace("/");
   }, [quote, router]);
 
-  // Autoplay → /random, with proper cleanup
+  // Navigate when timeLeft reaches 0
   useEffect(() => {
-    // clear any existing timer first
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-    if (!quote || !isPlaying) return;
-
-    timeoutRef.current = window.setTimeout(() => {
+    if (!isPlaying) return;
+    if (timeLeft <= 0) {
       router.push("/random");
-      timeoutRef.current = null;
-    }, Math.max(0, transitionTime));
-
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-    };
-  }, [quote, quote?.id, isPlaying, transitionTime, router]);
+      console.log("Auto-navigating to /random");
+    }
+  }, [isPlaying, timeLeft, router]);
 
   if (!quote) return null; // brief blank while redirecting
 

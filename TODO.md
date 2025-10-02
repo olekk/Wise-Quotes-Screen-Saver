@@ -1,4 +1,6 @@
-# Step 1
+# TODO
+
+## Step 1
 
 Gather all data
 Structure all data:
@@ -16,12 +18,12 @@ Structure all data:
    - EN
    - PL
 
-# Step 2
+## Step 2
 
 ~~Showing the quote (longest and shortest) - source hardcoded~~
 ~~transition after hardcoded time~~
 
-# Step 3
+## Step 3
 
 ~~hiding menu with:~~
 Tools to:
@@ -30,12 +32,12 @@ shuffle sources
 transition time visible in human readable format
 countdown
 
-# Step 4
+## Step 4
 
 highliting words mentioned at the end of the meditations pdf and showing the definitions in different style, under the text
 Glossary page 124
 
-# Step 5
+## Step 5
 
 other improvements like
 changing style
@@ -43,7 +45,7 @@ iframe with youtube or yt music
 option to send feedback / report issue
 redirect to original pdf
 
-# Step 6
+## Step 6
 
 Deploy on my github.io
 Make downloadable screensaver out of it

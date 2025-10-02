@@ -1,6 +1,7 @@
 import { useSettings } from "@/store/store";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
+import Countdown from "../Countdown";
 
 // interface MenuProps {
 //   children?: ReactNode;
@@ -8,12 +9,14 @@ import React from "react";
 // }
 
 const Menu: React.FC = () => {
-  const isPlaying = useSettings((s) => s.isPlaying);
-  const toggle = useSettings((s) => s.toggleIsPlaying);
-  const time = useSettings((s) => s.transitionTime);
-  const setTime = useSettings((s) => s.setTransitionTime);
-  const chosen = useSettings((s) => s.chosenBooks);
-  const setBooks = useSettings((s) => s.setChosenBooks);
+  const {
+    isPlaying,
+    toggleIsPlaying: toggle,
+    transitionTime: time,
+    setTransitionTime: setTime,
+    chosenBooks: chosen,
+    setChosenBooks: setBooks,
+  } = useSettings();
 
   return (
     <>
@@ -37,6 +40,11 @@ const Menu: React.FC = () => {
           onChange={(e) => setTime(Number(e.target.value) || 1000)}
           className="w-28 bg-zinc-900 border border-zinc-700 px-2 py-1 rounded"
         />
+      </label>
+
+      <label className="flex items-center gap-2">
+        <span className="text-xs text-zinc-400">Countdown</span>
+        <Countdown />
       </label>
 
       {/* simple multiselect example; replace options with your real book IDs */}

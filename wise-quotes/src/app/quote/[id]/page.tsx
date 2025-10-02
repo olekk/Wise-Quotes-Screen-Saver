@@ -8,9 +8,16 @@ import { useSettings } from "@/store/store";
 export default function QuotePage() {
   const { id } = useParams() as { id: string };
   const quote = getQuoteById(id);
-  const { isPlaying, timeLeft } = useSettings();
+  const { isPlaying, timeLeft, setTimeLeft } = useSettings();
   const router = useRouter();
 
+  useEffect(() => {
+    document.title = quote ? `${quote.author} - Wise Quotes` : "Wise Quotes";
+  }, [quote]);
+
+  useEffect(() => {
+    setTimeLeft(useSettings.getState().transitionTime);
+  }, []);
   // If quote missing, navigate home (client-safe)
   useEffect(() => {
     if (!quote) router.replace("/");

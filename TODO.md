@@ -29,8 +29,8 @@ Structure all data:
 Tools to:
 shuffle sources
 ~~set transition time~~
-transition time visible in human readable format
-countdown
+~~transition time visible in human readable format~~
+~~countdown~~
 
 ## Step 4
 

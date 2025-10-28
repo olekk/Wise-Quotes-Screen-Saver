@@ -7,8 +7,8 @@ import { useSettings } from "@/store/store";
 
 export default function QuotePage() {
   const { id } = useParams() as { id: string };
-  const quote = getQuoteById(id);
-  const { isPlaying, timeLeft, setTimeLeft } = useSettings();
+  const { isPlaying, timeLeft, setTimeLeft, chosenBooks } = useSettings();
+  const quote = getQuoteById(id, chosenBooks);
   const router = useRouter();
 
   useEffect(() => {

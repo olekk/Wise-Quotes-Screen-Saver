@@ -106,8 +106,8 @@ const Menu: React.FC = () => {
         }}
         className="bg-zinc-900 border border-zinc-700 px-2 py-1 rounded"
       >
-        <option value="ma">Marcus Aurelius</option>
-        <option value="sol">School of Life</option>
+        <option value="marcusAureliusEN">M.A. - Meditations (english)</option>
+        <option value="marcusAureliusPL">M.A. - Rozmyślania (polski)</option>
       </select>
     </>
   );

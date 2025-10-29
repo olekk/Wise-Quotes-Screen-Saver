@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Countdown from "../Countdown";
 import { useParams } from "next/navigation";
+import { getFirstId } from "@/lib/quotes";
 
 const Menu: React.FC = () => {
   const {
@@ -10,7 +11,7 @@ const Menu: React.FC = () => {
     toggleIsPlaying: toggle,
     transitionTime: time,
     setTransitionTime: setTime,
-    chosenBooks: chosen,
+    chosenBooks,
     setChosenBooks: setBooks,
   } = useSettings();
 
@@ -38,7 +39,7 @@ const Menu: React.FC = () => {
     <>
       <Link href="/">Intro</Link>
       <Link href="/random">Random</Link>
-      <Link href="/quote/Marcus-Aurelius-Meditations-0101">First</Link>
+      <Link href={`/quote/${getFirstId(chosenBooks)}`}>First</Link>
 
       <Link href={`/quote/${id}/prev`}>Previous</Link>
       <Link href={`/quote/${id}/next`}>Next</Link>
@@ -105,7 +106,7 @@ const Menu: React.FC = () => {
       {/* simple multiselect example; replace options with your real book IDs */}
       <select
         multiple
-        value={chosen}
+        value={chosenBooks}
         onChange={(e) => {
           const ids = Array.from(e.target.selectedOptions).map((o) => o.value);
           setBooks(ids);

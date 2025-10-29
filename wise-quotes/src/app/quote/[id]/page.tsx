@@ -37,7 +37,7 @@ export default function QuotePage() {
   return (
     <div className="font-serif max-w-5xl mx-auto p-4 tracking-wider leading-relaxed text-xl">
       <h1 className="text-3xl">{quote.title}</h1>
-      <blockquote className="text-2xl my-8 border-l-4 border-gray-300 pl-4 italic">
+      <blockquote className="text-2xl my-8 border-l-4 border-gray-300 pl-4 italic whitespace-pre-line">
         <p>{quote.text}</p>
       </blockquote>
       <footer className="text-right">~{quote.author}</footer>

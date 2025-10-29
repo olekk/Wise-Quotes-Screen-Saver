@@ -40,22 +40,31 @@ const ALL = (chosenBooks?: string[]): Quote[] =>
 export function getAllIds(chosenBooks?: string[]) {
   return ALL(chosenBooks).map((q) => q.id);
 }
+
 export function getQuoteById(id: string, chosenBooks?: string[]) {
   return ALL(chosenBooks).find((q) => q.id === id);
 }
+
 export function getRandomId(chosenBooks?: string[]) {
   const all = ALL(chosenBooks);
   return all[Math.floor(Math.random() * all.length)]!.id;
 }
+
 export function getNextId(currentId: string, chosenBooks?: string[]) {
   const all = ALL(chosenBooks);
   const index = all.findIndex((q) => q.id === currentId);
   if (index === -1 || all.length === 0) return null;
   return all[index + 1].id;
 }
+
 export function getPrevId(currentId: string, chosenBooks?: string[]) {
   const all = ALL(chosenBooks);
   const index = all.findIndex((q) => q.id === currentId);
   if (index === -1 || all.length === 0) return null;
   return all[index - 1].id;
+}
+
+export function getFirstId(chosenBooks?: string[]) {
+  const all = ALL(chosenBooks);
+  return all[0].id;
 }

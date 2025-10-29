@@ -51,11 +51,11 @@ export function getNextId(currentId: string, chosenBooks?: string[]) {
   const all = ALL(chosenBooks);
   const index = all.findIndex((q) => q.id === currentId);
   if (index === -1 || all.length === 0) return null;
-  return all[(index + 1) % all.length]!.id;
+  return all[index + 1].id;
 }
-export function getPreviousId(currentId: string, chosenBooks?: string[]) {
+export function getPrevId(currentId: string, chosenBooks?: string[]) {
   const all = ALL(chosenBooks);
   const index = all.findIndex((q) => q.id === currentId);
   if (index === -1 || all.length === 0) return null;
-  return all[(index - 1 + all.length) % all.length]!.id;
+  return all[index - 1].id;
 }

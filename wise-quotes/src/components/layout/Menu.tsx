@@ -2,6 +2,7 @@ import { useSettings } from "@/store/store";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Countdown from "../Countdown";
+import { useParams } from "next/navigation";
 
 const Menu: React.FC = () => {
   const {
@@ -31,11 +32,16 @@ const Menu: React.FC = () => {
     setTime(ms);
   };
 
+  const { id } = useParams() as { id: string };
+
   return (
     <>
       <Link href="/">Intro</Link>
       <Link href="/random">Random</Link>
       <Link href="/quote/Marcus-Aurelius-Meditations-0101">First</Link>
+
+      <Link href={`/quote/${id}/prev`}>Previous</Link>
+      <Link href={`/quote/${id}/next`}>Next</Link>
 
       <button
         onClick={toggle}

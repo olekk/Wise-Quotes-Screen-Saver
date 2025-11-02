@@ -5,10 +5,21 @@ import Countdown from "../Countdown";
 import { useParams } from "next/navigation";
 import { getFirstId } from "@/lib/quotes";
 
+// MUI imports
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
+import CircleIcon from "@mui/icons-material/Circle";
+import { Box } from "@mui/material";
+
 const Menu: React.FC = () => {
   const {
     isPlaying,
-    toggleIsPlaying: toggle,
+    toggleIsPlaying,
+    isShuffle,
+    toggleIsShuffle,
     transitionTime: time,
     setTransitionTime: setTime,
     chosenBooks,
@@ -37,19 +48,65 @@ const Menu: React.FC = () => {
 
   return (
     <>
-      <Link href="/">Intro</Link>
-      <Link href="/random">Random</Link>
-      <Link href={`/quote/${getFirstId(chosenBooks)}`}>First</Link>
+      <Link href="/">HOME</Link>
 
-      <Link href={`/quote/${id}/prev`}>Previous</Link>
-      <Link href={`/quote/${id}/next`}>Next</Link>
+      <Link href={`/quote/${getFirstId(chosenBooks)}`}>Show First Quote</Link>
+      <Link href="/random">Show Random Quote</Link>
 
-      <button
-        onClick={toggle}
-        className="ml-auto px-2 py-1 rounded bg-white text-black"
+      {/* simple multiselect example; replace options with your real book IDs */}
+      <select
+        multiple
+        value={chosenBooks}
+        onChange={(e) => {
+          const ids = Array.from(e.target.selectedOptions).map((o) => o.value);
+          setBooks(ids);
+        }}
+        className="bg-zinc-900 border border-zinc-700 px-2 py-1 rounded"
       >
-        {isPlaying ? "Pause" : "Play"}
-      </button>
+        <option value="marcusAureliusEN">M.A. - Meditations (english)</option>
+        <option value="marcusAureliusPL">M.A. - Rozmyślania (polski)</option>
+      </select>
+      <Box
+        sx={{ "& svg": { fontSize: 45 } }}
+        className="mb-5 mt-10 justify-between flex items-center"
+      >
+        <Link href={`/quote/${id}/prev`} title="Show Previous Quote">
+          <ArrowBackIcon />
+        </Link>
+
+        <button
+          onClick={toggleIsPlaying}
+          className="px-2 py-1 rounded bg-white text-black cursor-pointer"
+          title="Toggle Play/Pause"
+        >
+          {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+        </button>
+        <button
+          onClick={toggleIsShuffle}
+          className="cursor-pointer"
+          title="Toggle Shuffle"
+        >
+          {isShuffle ? (
+            <div style={{ position: "relative" }}>
+              <ShuffleIcon />
+              <CircleIcon
+                sx={{
+                  transform: "scale(.15)",
+                  position: "absolute",
+                  bottom: -22,
+                  left: 0,
+                }}
+              />
+            </div>
+          ) : (
+            <ShuffleIcon sx={{ color: "grey" }} />
+          )}
+        </button>
+
+        <Link href={`/quote/${id}/next`} title="Show Next Quote">
+          <ArrowForwardIcon />
+        </Link>
+      </Box>
 
       <label className="flex items-center gap-2">
         <span className="text-xs text-zinc-400">Transition</span>
@@ -65,6 +122,7 @@ const Menu: React.FC = () => {
           className="w-12 border-0 outline-0"
           placeholder="hh"
           name="hours"
+          style={{ fontSize: "2rem" }}
         />
         <span>:</span>
         <input
@@ -80,6 +138,7 @@ const Menu: React.FC = () => {
           className="w-12 border-0 outline-0"
           placeholder="mm"
           name="minutes"
+          style={{ fontSize: "2rem" }}
         />
         <span>:</span>
         <input
@@ -95,27 +154,15 @@ const Menu: React.FC = () => {
           className="w-12 border-0 outline-0"
           placeholder="ss"
           name="seconds"
+          style={{ fontSize: "2rem" }}
         />
       </label>
 
-      <label className="flex items-center gap-2">
-        <span className="text-xs text-zinc-400">Countdown</span>
+      <Box sx={{ fontSize: 30 }}>
+        <span className="text-xs text-zinc-400">Countdown</span> <br />
         <Countdown />
-      </label>
-
-      {/* simple multiselect example; replace options with your real book IDs */}
-      <select
-        multiple
-        value={chosenBooks}
-        onChange={(e) => {
-          const ids = Array.from(e.target.selectedOptions).map((o) => o.value);
-          setBooks(ids);
-        }}
-        className="bg-zinc-900 border border-zinc-700 px-2 py-1 rounded"
-      >
-        <option value="marcusAureliusEN">M.A. - Meditations (english)</option>
-        <option value="marcusAureliusPL">M.A. - Rozmyślania (polski)</option>
-      </select>
+        {/* to add increment, decrement buttons later and remove the number inputs */}
+      </Box>
     </>
   );
 };

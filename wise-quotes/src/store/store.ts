@@ -5,6 +5,8 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 type SettingsState = {
   isPlaying: boolean;
+  isShuffle: boolean;
+  toggleIsShuffle: () => void;
   transitionTime: number; // ms
   chosenBooks: string[]; // e.g. ['ma', 'sol']
   timeLeft: number; // ms
@@ -19,6 +21,8 @@ export const useSettings = create<SettingsState>()(
   persist(
     (set, get) => ({
       isPlaying: true,
+      isShuffle: true,
+      toggleIsShuffle: () => set({ isShuffle: !get().isShuffle }),
       chosenBooks: [],
 
       transitionTime: 10_000,

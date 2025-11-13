@@ -7,7 +7,8 @@ import { useSettings } from "@/store/store";
 
 export default function QuotePage() {
   const { id } = useParams() as { id: string };
-  const { isPlaying, timeLeft, setTimeLeft, chosenBooks } = useSettings();
+  const { isPlaying, timeLeft, setTimeLeft, chosenBooks, isShuffle } =
+    useSettings();
   const quote = getQuoteById(id, chosenBooks);
   const router = useRouter();
 
@@ -27,8 +28,7 @@ export default function QuotePage() {
   useEffect(() => {
     if (!isPlaying) return;
     if (timeLeft <= 0) {
-      router.push("/random");
-      console.log("Auto-navigating to /random");
+      router.push(isShuffle ? "/random" : `/quote/${id}/next`);
     }
   }, [isPlaying, timeLeft, router]);
 

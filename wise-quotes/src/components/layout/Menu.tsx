@@ -57,17 +57,20 @@ const Menu: React.FC = () => {
         <button
           onClick={toggleIsPlaying}
           className="px-2 py-1 rounded bg-white text-black cursor-pointer"
-          title="Toggle Play/Pause"
         >
-          {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+          {isPlaying ? (
+            <span title="Pause Slideshow">
+              <PauseIcon />
+            </span>
+          ) : (
+            <span title="Play Slideshow">
+              <PlayArrowIcon />
+            </span>
+          )}
         </button>
-        <button
-          onClick={toggleIsShuffle}
-          className="cursor-pointer"
-          title="Toggle Shuffle"
-        >
+        <button onClick={toggleIsShuffle} className="cursor-pointer">
           {isShuffle ? (
-            <div style={{ position: "relative" }}>
+            <div style={{ position: "relative" }} title="Shuffle On">
               <ShuffleIcon />
               <CircleIcon
                 sx={{
@@ -79,7 +82,9 @@ const Menu: React.FC = () => {
               />
             </div>
           ) : (
-            <ShuffleIcon sx={{ color: "grey" }} />
+            <span title="Shuffle Off">
+              <ShuffleIcon sx={{ color: "grey" }} />
+            </span>
           )}
         </button>
 

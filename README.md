@@ -4,6 +4,7 @@ Simple page displaying inspirational quotes from my custom database featuring my
 
 Marcus aurelius
 The school of life posts
+Recovering Overthinker
 Bible
 A course on miracles
 My own

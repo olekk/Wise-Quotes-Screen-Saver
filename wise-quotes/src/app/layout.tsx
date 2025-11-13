@@ -25,7 +25,7 @@ export default function RootLayout({
         <header
           onMouseLeave={() => setIsMenuHidden(true)}
           className="fixed top-0 inset-x-0 p-4 flex flex-col gap-4 bg-black/60 backdrop-blur w-[280px] h-[100vh] transition-all"
-          // style={{ left: isMenuHidden ? "-280px" : "0" }}
+          style={{ left: isMenuHidden ? "-280px" : "0" }}
         >
           <Menu />
         </header>

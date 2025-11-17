@@ -1,6 +1,6 @@
 import { useSettings } from "@/store/store";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Countdown from "../Countdown";
 import { useParams } from "next/navigation";
 import { getFirstId } from "@/lib/quotes";

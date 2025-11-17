@@ -34,13 +34,14 @@ const ALL = (chosenBooks?: string[]): Quote[] =>
             author: q.author ?? c.collection.author ?? c.collection.title,
           }))
         )
-    : collections.marcusAureliusEN.quotes.map((q) => ({
-        ...q,
-        author:
-          q.author ??
-          collections.marcusAureliusEN.collection.author ??
-          collections.marcusAureliusEN.collection.title,
-      }));
+    : Object.entries(collections)
+        .map((ent) => ent[1])
+        .flatMap((c) =>
+          c.quotes.map((q) => ({
+            ...q,
+            author: q.author ?? c.collection.author ?? c.collection.title,
+          }))
+        );
 
 export function getAllIds(chosenBooks?: string[]) {
   return ALL(chosenBooks).map((q) => q.id);

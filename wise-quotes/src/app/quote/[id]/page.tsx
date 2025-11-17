@@ -7,8 +7,14 @@ import { useSettings } from "@/store/store";
 
 export default function QuotePage() {
   const { id } = useParams() as { id: string };
-  const { isPlaying, timeLeft, setTimeLeft, chosenBooks, isShuffle } =
-    useSettings();
+  const {
+    isPlaying,
+    timeLeft,
+    setTimeLeft,
+    chosenBooks,
+    isShuffle,
+    transitionTime,
+  } = useSettings();
   const quote = getQuoteById(id, chosenBooks);
   const router = useRouter();
 
@@ -17,7 +23,7 @@ export default function QuotePage() {
   }, [quote]);
 
   useEffect(() => {
-    setTimeLeft(useSettings.getState().transitionTime);
+    setTimeLeft(transitionTime);
   }, []);
   // If quote missing, navigate home (client-safe)
   useEffect(() => {

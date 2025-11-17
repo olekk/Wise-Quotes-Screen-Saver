@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+
 import "./globals.css";
 import { Inter, EB_Garamond } from "next/font/google";
 import { useState } from "react";

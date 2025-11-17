@@ -23,10 +23,10 @@ export const useSettings = create<SettingsState>()(
       isPlaying: true,
       isShuffle: true,
       toggleIsShuffle: () => set({ isShuffle: !get().isShuffle }),
-      chosenBooks: [],
+      chosenBooks: ["theSchoolOfLifePL"],
 
-      transitionTime: 10_000,
-      timeLeft: 10_000,
+      transitionTime: 60_000 * 60,
+      timeLeft: 60_000 * 60,
       setIsPlaying: (v) => set({ isPlaying: v }),
       toggleIsPlaying: () => set({ isPlaying: !get().isPlaying }),
       setTransitionTime: (ms) =>

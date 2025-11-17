@@ -46,6 +46,7 @@ const Menu: React.FC = () => {
         <option value="marcusAureliusEN">M.A. - Meditations (english)</option>
         <option value="marcusAureliusPL">M.A. - Rozmyślania (polski)</option>
         <option value="theSchoolOfLifeEN">The School Of Life (english)</option>
+        <option value="theSchoolOfLifePL">The School Of Life (polski)</option>
       </select>
       <Box
         sx={{ "& svg": { fontSize: 45 } }}

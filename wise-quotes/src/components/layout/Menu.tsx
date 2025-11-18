@@ -41,12 +41,15 @@ const Menu: React.FC = () => {
           const ids = Array.from(e.target.selectedOptions).map((o) => o.value);
           setBooks(ids);
         }}
-        className="bg-zinc-900 border border-zinc-700 px-2 py-1 rounded"
+        className="bg-zinc-900 border border-zinc-700 px-2 py-1 rounded h-32"
       >
         <option value="marcusAureliusEN">M.A. - Meditations (english)</option>
         <option value="marcusAureliusPL">M.A. - Rozmyślania (polski)</option>
         <option value="theSchoolOfLifeEN">The School Of Life (english)</option>
         <option value="theSchoolOfLifePL">The School Of Life (polski)</option>
+        <option value="theSchoolOfLifePLStr">
+          The School Of Life (streszczone)
+        </option>
       </select>
       <Box
         sx={{ "& svg": { fontSize: 45 } }}

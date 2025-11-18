@@ -5,10 +5,10 @@ import os
 # Pobieramy klucz API bezpośrednio ze zmiennej środowiskowej
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def translate_text(text, style="Przetłumacz na polski, zachowując styl oryginału."):
+def translate_text(text, style="Streść to by miało maksymalnie 1200 znaków. Zachowując styl oryginału, główny przekaz autora, spróbuj trzymać się jego toku myślenia i go odwzorować, ale w krótszej wersji. Max 1200 characters. "):
     prompt = f"{style}\n\n{text}"
 
-    estimated_output_tokens = len(text) // 2  # approx. 1 token per 3 chars
+    estimated_output_tokens = len(text) // 3  # approx. 1 token per 3 chars
     
     response = client.responses.create(
         model="gpt-5.1",
@@ -26,7 +26,7 @@ def process_json(input_file, output_file):
     else:
         translated_data = {
             "collection": {
-                "title": "The School Of Life (Translated)",
+                "title": "The School Of Life (Streszczone) - PL",
                 "version": 1,
                 "language": "pl"
             },
@@ -38,7 +38,7 @@ def process_json(input_file, output_file):
         data = json.load(f)
 
     for quote in data["quotes"]:
-        output_id = quote["id"].replace("EN", "PL")
+        output_id = quote["id"].replace("PL", "PL-Streszczone")
 
         # Pomijamy już przetłumaczone artykuły
         if output_id in translated_ids:
@@ -46,7 +46,8 @@ def process_json(input_file, output_file):
             continue
 
         print(f"Tłumaczenie artykułu: {quote['id']}...")
-        translated_title = translate_text(quote["title"])
+        # translated_title = translate_text(quote["title"])
+        translated_title = quote["title"]
         translated_text = translate_text(quote["text"])
 
         translated_data["quotes"].append({
@@ -64,4 +65,4 @@ def process_json(input_file, output_file):
     print(f"Proces ukończony. Wynik zapisano do {output_file}")
 
 if __name__ == "__main__":
-    process_json("The-School-Of-Life-EN.json", "The-School-Of-Life-PL-new.json")
+    process_json("The-School-Of-Life-PL.json", "The-School-Of-Life-PL-streszczone.json")

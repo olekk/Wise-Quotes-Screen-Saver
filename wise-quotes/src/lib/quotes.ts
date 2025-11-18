@@ -15,12 +15,14 @@ import marcusAureliusPL from "@/data/Marek-Aureliusz-Rozmyslania-PL.json";
 
 import theSchoolOfLifeEN from "@/data/The-School-Of-Life-EN.json";
 import theSchoolOfLifePL from "@/data/The-School-Of-Life-PL.json";
+import theSchoolOfLifePLStr from "@/data/The-School-Of-Life-PL-streszczone.json";
 
 const collections = {
   marcusAureliusEN: marcusAureliusEN as QuotesFile,
   marcusAureliusPL: marcusAureliusPL as QuotesFile,
   theSchoolOfLifeEN: theSchoolOfLifeEN as QuotesFile,
   theSchoolOfLifePL: theSchoolOfLifePL as QuotesFile,
+  theSchoolOfLifePLStr: theSchoolOfLifePLStr as QuotesFile,
 };
 
 const ALL = (chosenBooks?: string[]): Quote[] =>
